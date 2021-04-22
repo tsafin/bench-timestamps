@@ -1,0 +1,9 @@
+[submodule "p5-time-moment"]
+	path = p5-time-moment
+	url = https://github.com/chansen/p5-time-moment.git
+[submodule "icu"]
+	path = icu
+	url = https://github.com/unicode-org/icu.git
+[submodule "cctz"]
+	path = cctz
+	url = https://github.com/google/cctz.git
