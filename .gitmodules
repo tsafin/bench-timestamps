@@ -7,3 +7,6 @@
 [submodule "cctz"]
 	path = cctz
 	url = https://github.com/google/cctz.git
+[submodule "c-dt"]
+	path = c-dt
+	url = https://github.com/chansen/c-dt.git
