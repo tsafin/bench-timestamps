@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
 
+project(bench-timetamp)
+
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+
 # enable_testing()
 # find_package(GTest REQUIRED)
 # include(GoogleTest)
@@ -12,6 +16,8 @@ add_subdirectory(${GoogleTest_ROOT}
                 EXCLUDE_FROM_ALL)
 add_subdirectory(c-dt)
 add_subdirectory(cctz)
+
+include(build_icu)
 
 add_executable(tests tests/test-cdt.cpp tests/test-cctz.cpp)
 target_include_directories(tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/)
