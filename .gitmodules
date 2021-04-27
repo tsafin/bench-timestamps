@@ -9,4 +9,4 @@
 	url = https://github.com/google/cctz.git
 [submodule "c-dt"]
 	path = c-dt
-	url = https://github.com/chansen/c-dt.git
+	url = https://github.com/tsafin/c-dt.git
