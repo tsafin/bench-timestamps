@@ -94,17 +94,26 @@ static void ParseTimeStamps()
 }
 
 void CDT_Parse(benchmark::State& state) {
-#if 0
-	while (state.KeepRunning()) {
-		benchmark::DoNotOptimize(
-			ParseTimeStamps()
-		);
-	}
-#else
 	for (auto _ : state)
 		ParseTimeStamps();
-#endif
 }
 BENCHMARK(CDT_Parse);
+
+static void Parse1()
+{
+	const char civil_string[] = "2015-02-18T10:50:31.521345123+10:00";
+	dt_t dt_expected{};
+	size_t rc = dt_parse_iso_date(civil_string,
+				      sizeof(civil_string) - 1,
+				      &dt_expected);
+	assert(rc > 1);
+}
+
+void CDT_Parse1(benchmark::State& state) {
+	for (auto _ : state)
+		Parse1();
+}
+BENCHMARK(CDT_Parse1);
+
 
 BENCHMARK_MAIN();
