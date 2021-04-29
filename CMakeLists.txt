@@ -18,7 +18,7 @@ add_subdirectory(${GoogleTest_ROOT}
 add_subdirectory(c-dt)
 add_subdirectory(cctz)
 
-set(ICU_STATIC 1)
+# set(ICU_STATIC 1)
 
 include(build_icu)
 
@@ -26,9 +26,9 @@ add_executable(tests
     tests/test-cdt.cpp tests/test-cctz.cpp tests/test-icudt.cpp
 )
 
-target_compile_definitions(tests PUBLIC 
-    U_DISABLE_RENAMING=1
-)
+#target_compile_definitions(tests PUBLIC 
+#    U_DISABLE_RENAMING=1
+#)
 
 target_include_directories(tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/unicode
@@ -39,6 +39,7 @@ target_link_libraries(tests gtest_main cdt cctz::cctz icu::icu dl)
 add_executable(bench
     benchs/bench-cdt.cpp
     benchs/bench-cctz.cpp
+    benchs/bench-icudt.cpp
 )
 target_include_directories(bench PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/

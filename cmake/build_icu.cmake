@@ -18,6 +18,14 @@ foreach(ICU_BASE_NAME i18n io tu uc data)
     endif()
 endforeach()
 
+set(PASS_CC ${CMAKE_COMMAND} -E env
+        CC=${CMAKE_C_FLAGS}
+        CXX=${CMAKE_CXX_FLAGS}
+        CFLAGS=${CMAKE_C_FLAGS}
+        CXXFLAGS=${CMAKE_CXX_FLAGS}
+        LDFLAGS=${CMAKE_MODULE_LINKER_FLAGS}
+)
+
 ExternalProject_Add(
     icu_make
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/icu/icu4c
@@ -26,12 +34,13 @@ ExternalProject_Add(
     UPDATE_COMMAND ""
     PATCH_COMMAND ""
     CONFIGURE_COMMAND
-        <SOURCE_DIR>/source/configure
+        ${PASS_CC} <SOURCE_DIR>/source/configure
             --enable-static
             --disable-renaming
+            $<$<CONFIG:Debug>:--enable-debug>
             --prefix=${CMAKE_CURRENT_BINARY_DIR}/icu
             --libdir=${CMAKE_CURRENT_BINARY_DIR}/icu/lib/
-    BUILD_COMMAND ${MAKE_PROGRAM} -j 4
+    BUILD_COMMAND ${PASS_CC} ${MAKE_PROGRAM} -j 6
     INSTALL_COMMAND ""
 )
 # INSTALL_COMMAND ${MAKE_PROGRAM} install
