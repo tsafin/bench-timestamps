@@ -4,7 +4,7 @@ This repository uses several C/C++ timestamp parser implementations
 we have got our access to:
 
 - Perl XS implementation [chansen/p5-time-moment](https://github.com/chansen/p5-time-moment.git)
-  by  (Christian Hansen)[@hansen]. It's not compiled neither to test, nor 
+  by  [Christian Hansen](https://github.com/chansen). It's not compiled neither to test, nor 
   to bench. We use their test artifacts for basis of our own tests;
 
 - Pure C implemenentation [chansen/c-dt](https://github.com/chansen/c-dt.git)
@@ -35,14 +35,13 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DBUILD_T
 
 ## Benchmark results
 
-Be warned - your mileage may vary significantly...
-
-### Release mode
+gcc 8.3, with release mode gives the following numbers for me.
+_Be warned - your mileage may vary significantly_...
 
 ```
-✔ ~/bench-timestamp/build [master|✔] 
-19:44 $ ./bench 
-2021-04-29 19:44:48
+✔ ~/bench-timestamp/build [master|✚ 1] 
+02:12 $ ./bench 
+2021-04-30 02:13:00
 Running ./bench
 Run on (8 X 1992.01 MHz CPU s)
 CPU Caches:
@@ -51,42 +50,18 @@ CPU Caches:
   L2 Unified 256K (x4)
   L3 Unified 8192K (x1)
 ***WARNING*** Library was built as DEBUG. Timings may be affected.
----------------------------------------------------
-Benchmark            Time           CPU Iterations
----------------------------------------------------
-CDT_Parse         2583 ns       2583 ns     301967
-CDT_Parse1          25 ns         25 ns   25014165
-CCTZ_Parse1        498 ns        498 ns    1151814
-ICU_Parse1       66973 ns      66972 ns      12217
-✔ ~/bench-timestamp/build [master|✔] 
+------------------------------------------------------
+Benchmark               Time           CPU Iterations
+------------------------------------------------------
+CDT_Parse            2025 ns       1958 ns     469491
+CDT_Parse1             23 ns         23 ns   30816175
+CCTZ_Parse1           475 ns        475 ns    1319145
+ICU_Parse1         595501 ns     594711 ns      13085
+ICU_Parse1_Inv        238 ns        238 ns    2871033
+✔ ~/bench-timestamp/build [master|✚ 1]
 ```
 
 Pay attention to the timings of `*_Parse1` functions!
-
-### Debug mode 
-
-```
-✔ ~/bench-timestamp/build [master|✚ 3…1] 
-19:14 $ ./bench
-2021-04-29 19:14:21
-Running ./bench
-Run on (8 X 1992.01 MHz CPU s)
-CPU Caches:
-  L1 Data 32K (x4)
-  L1 Instruction 32K (x4)
-  L2 Unified 256K (x4)
-  L3 Unified 8192K (x1)
-***WARNING*** Library was built as DEBUG. Timings may be affected.
----------------------------------------------------
-Benchmark            Time           CPU Iterations
----------------------------------------------------
-CDT_Parse         7852 ns       7853 ns      89204
-CDT_Parse1         106 ns        106 ns    5226233
-CCTZ_Parse1       2463 ns       2463 ns     230875
-ICU_Parse1       88205 ns      88203 ns       9390
-✔ ~/bench-timestamp/build [master|✚ 3…1] 
-
-```
 
 
 

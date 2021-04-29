@@ -15,7 +15,6 @@ static void ParseTimeStamps()
 {
 	UErrorCode status = U_ZERO_ERROR;
 	UDateFormat *fmt = udat_open(UDAT_PATTERN, UDAT_PATTERN, "en_US", NULL, 0, format, 0, &status);
-
 	assert(!U_FAILURE(status));
 	int32_t pos = 0;
 
@@ -30,3 +29,25 @@ void ICU_Parse1(benchmark::State& state)
 
 }
 BENCHMARK(ICU_Parse1);
+
+namespace {
+	UErrorCode status = U_ZERO_ERROR;
+	const UDateFormat *const_fmt = udat_open(UDAT_PATTERN, UDAT_PATTERN, "en_US", NULL, 0, format, 0, &status);
+}
+
+static void ParseTimeStamps_Inv()
+{
+	assert(!U_FAILURE(status));
+	int32_t pos = 0;
+
+	UDate d = udat_parse(const_fmt, civil_string, sizeof(civil_string) - 1, &pos, &status);
+	assert(!U_FAILURE(status));
+}
+
+void ICU_Parse1_Inv(benchmark::State& state)
+{
+	for (auto _ : state)
+		ParseTimeStamps_Inv();
+
+}
+BENCHMARK(ICU_Parse1_Inv);
