@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
-
+# cmake_policy(SET CMP0004 OLD)
+cmake_policy(SET CMP0065 OLD)
 project(bench-timetamp)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
@@ -17,13 +18,30 @@ add_subdirectory(${GoogleTest_ROOT}
 add_subdirectory(c-dt)
 add_subdirectory(cctz)
 
+set(ICU_STATIC 1)
+
 include(build_icu)
 
-add_executable(tests tests/test-cdt.cpp tests/test-cctz.cpp)
-target_include_directories(tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/)
-target_link_libraries(tests PUBLIC gtest_main cdt cctz::cctz)
+add_executable(tests
+    tests/test-cdt.cpp tests/test-cctz.cpp tests/test-icudt.cpp
+)
 
-add_executable(bench benchs/bench-cdt.cpp benchs/bench-cctz.cpp)
-target_include_directories(bench PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/)
-target_link_libraries(bench benchmark::benchmark cdt cctz::cctz)
+target_compile_definitions(tests PUBLIC 
+    U_DISABLE_RENAMING=1
+)
+
+target_include_directories(tests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/unicode
+    ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/
+)
+target_link_libraries(tests gtest_main cdt cctz::cctz icu::icu dl)
+
+add_executable(bench
+    benchs/bench-cdt.cpp
+    benchs/bench-cctz.cpp
+)
+target_include_directories(bench PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/
+)
+target_link_libraries(bench benchmark::benchmark cdt cctz::cctz icu::icu dl)
 # gtest_discover_tests(tests)
