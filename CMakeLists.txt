@@ -17,6 +17,7 @@ add_subdirectory(${GoogleTest_ROOT}
                 EXCLUDE_FROM_ALL)
 add_subdirectory(c-dt)
 add_subdirectory(cctz)
+add_subdirectory(re2c)
 
 # set(ICU_STATIC 1)
 
@@ -24,6 +25,18 @@ include(build_icu)
 
 add_executable(tests
     tests/test-cdt.cpp tests/test-cctz.cpp tests/test-icudt.cpp
+)
+
+add_custom_command(
+OUTPUT
+    ${CMAKE_CURRENT_BINARY_DIR}/bench-cdt-re.cpp
+COMMAND
+    re2c -W -g -T
+        -o ${CMAKE_CURRENT_BINARY_DIR}/bench-cdt-re.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/benchs/bench-cdt-re.re
+DEPENDS
+    re2c ${CMAKE_CURRENT_SOURCE_DIR}/benchs/bench-cdt-re.re
+VERBATIM
 )
 
 #target_compile_definitions(tests PUBLIC 
@@ -40,6 +53,7 @@ add_executable(bench
     benchs/bench-cdt.cpp
     benchs/bench-cctz.cpp
     benchs/bench-icudt.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/bench-cdt-re.cpp
 )
 target_include_directories(bench PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/

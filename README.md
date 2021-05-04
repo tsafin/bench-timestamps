@@ -12,9 +12,13 @@ we have got our access to:
   it slightly to properly integrate into cmake build process;
 
 - [Google Civil Time (cctz)](https://github.com/google/cctz.git) C++ 
-  implmentation.
+  implmentation;
 
-- and industry-standard [unicode-org/icu](https://github.com/unicode-org/icu.git) C++ implementation
+- and industry-standard [unicode-org/icu](https://github.com/unicode-org/icu.git) C++ implementation;
+
+- also there is simple `re2c`-based reimplementation of `c-dt` 
+  datetime parser, which supposed to show the beauty of deterministic
+  finite automatas :)
 
 ## Googletest and Google benchmark
 
@@ -39,9 +43,9 @@ gcc 8.3, with release mode gives the following numbers for me.
 _Be warned - your mileage may vary significantly_...
 
 ```
-✔ ~/bench-timestamp/build [master|✚ 1] 
-02:12 $ ./bench 
-2021-04-30 02:13:00
+✔ ~/bench-timestamp/build [master|●2✚ 2…2]
+01:09 $ ./bench
+2021-05-05 01:09:27
 Running ./bench
 Run on (8 X 1992.01 MHz CPU s)
 CPU Caches:
@@ -53,12 +57,12 @@ CPU Caches:
 ------------------------------------------------------
 Benchmark               Time           CPU Iterations
 ------------------------------------------------------
-CDT_Parse            2025 ns       1958 ns     469491
-CDT_Parse1             23 ns         23 ns   30816175
-CCTZ_Parse1           475 ns        475 ns    1319145
-ICU_Parse1         595501 ns     594711 ns      13085
-ICU_Parse1_Inv        238 ns        238 ns    2871033
-✔ ~/bench-timestamp/build [master|✚ 1]
+CDT_Parse            1526 ns       1526 ns     446671
+CDT_Parse1             17 ns         17 ns   42355736
+CCTZ_Parse1           583 ns        583 ns    1856389
+ICU_Parse1          74802 ns      74801 ns      11760
+ICU_Parse1_Inv        160 ns        160 ns    3999884
+RE_Parse1               7 ns          7 ns   92551055
 ```
 
 Pay attention to the timings of `*_Parse1` functions!

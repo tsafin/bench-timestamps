@@ -10,3 +10,6 @@
 [submodule "c-dt"]
 	path = c-dt
 	url = https://github.com/tsafin/c-dt.git
+[submodule "re2c"]
+	path = re2c
+	url = ./re2c/
