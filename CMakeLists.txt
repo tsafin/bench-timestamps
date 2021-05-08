@@ -23,20 +23,24 @@ add_subdirectory(re2c)
 
 include(build_icu)
 
-add_executable(tests
-    tests/test-cdt.cpp tests/test-cctz.cpp tests/test-icudt.cpp
-)
-
 add_custom_command(
 OUTPUT
-    ${CMAKE_CURRENT_BINARY_DIR}/bench-cdt-re.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/parse-date.cpp
 COMMAND
-    re2c -W -g -T
-        -o ${CMAKE_CURRENT_BINARY_DIR}/bench-cdt-re.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/benchs/bench-cdt-re.re
+    $<TARGET_FILE:re2c> -W -g
+        -o ${CMAKE_CURRENT_BINARY_DIR}/parse-date.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/common/parse-date.re
 DEPENDS
-    re2c ${CMAKE_CURRENT_SOURCE_DIR}/benchs/bench-cdt-re.re
+    re2c ${CMAKE_CURRENT_SOURCE_DIR}/common/parse-date.re
 VERBATIM
+)
+
+add_executable(tests
+    tests/test-cdt.cpp
+    tests/test-cctz.cpp
+    tests/test-icudt.cpp
+    tests/test-re2c.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/parse-date.cpp
 )
 
 #target_compile_definitions(tests PUBLIC 
@@ -53,7 +57,8 @@ add_executable(bench
     benchs/bench-cdt.cpp
     benchs/bench-cctz.cpp
     benchs/bench-icudt.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/bench-cdt-re.cpp
+    benchs/bench-cdt-re.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/parse-date.cpp
 )
 target_include_directories(bench PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/c-dt/
