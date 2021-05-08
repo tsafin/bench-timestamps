@@ -43,9 +43,8 @@ gcc 8.3, with release mode gives the following numbers for me.
 _Be warned - your mileage may vary significantly_...
 
 ```
-✔ ~/bench-timestamp/build [master|●2✚ 2…2]
-01:09 $ ./bench
-2021-05-05 01:09:27
+14:10 $ taskset -c 0 ./bench
+2021-05-08 14:12:57
 Running ./bench
 Run on (8 X 1992.01 MHz CPU s)
 CPU Caches:
@@ -57,12 +56,12 @@ CPU Caches:
 ------------------------------------------------------
 Benchmark               Time           CPU Iterations
 ------------------------------------------------------
-CDT_Parse            1526 ns       1526 ns     446671
-CDT_Parse1             17 ns         17 ns   42355736
-CCTZ_Parse1           583 ns        583 ns    1856389
-ICU_Parse1          74802 ns      74801 ns      11760
-ICU_Parse1_Inv        160 ns        160 ns    3999884
-RE_Parse1               7 ns          7 ns   92551055
+CDT_Parse            2617 ns       2617 ns     293549
+CDT_Parse1             67 ns         67 ns   10645285
+CCTZ_Parse1           463 ns        463 ns    1440682
+ICU_Parse1          46557 ns      46556 ns      15562
+ICU_Parse1_Inv        175 ns        175 ns    3548977
+RE_Parse1               7 ns          7 ns  109011958
 ```
 
 Pay attention to the timings of `*_Parse1` functions!
