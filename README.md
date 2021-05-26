@@ -43,8 +43,8 @@ gcc 8.3, with release mode gives the following numbers for me.
 _Be warned - your mileage may vary significantly_...
 
 ```
-19:04 $ taskset -c 0 ./bench --benchmark_repetitions=5
-2021-05-08 19:04:59
+15:08 $ taskset -c 0 ./bench --benchmark_repetitions=5
+2021-05-26 15:08:47
 Running ./bench
 Run on (8 X 1992.01 MHz CPU s)
 CPU Caches:
@@ -56,66 +56,76 @@ CPU Caches:
 -------------------------------------------------------------
 Benchmark                      Time           CPU Iterations
 -------------------------------------------------------------
-CDT_Parse                   4555 ns       4555 ns     111968
-CDT_Parse                   4567 ns       4567 ns     111968
-CDT_Parse                   4157 ns       4156 ns     111968
-CDT_Parse                   3808 ns       3808 ns     111968
-CDT_Parse                   4318 ns       4318 ns     111968
-CDT_Parse_mean              4281 ns       4281 ns     111968
-CDT_Parse_median            4318 ns       4318 ns     111968
-CDT_Parse_stddev             315 ns        315 ns     111968
-CDT_Parse1                    96 ns         96 ns    7083418
-CDT_Parse1                    87 ns         86 ns    7083418
-CDT_Parse1                    97 ns         97 ns    7083418
-CDT_Parse1                    88 ns         88 ns    7083418
-CDT_Parse1                   103 ns        103 ns    7083418
-CDT_Parse1_mean               94 ns         94 ns    7083418
-CDT_Parse1_median             96 ns         96 ns    7083418
-CDT_Parse1_stddev              7 ns          7 ns    7083418
-CCTZ_Parse1                  776 ns        776 ns     812659
-CCTZ_Parse1                  737 ns        737 ns     812659
-CCTZ_Parse1                  672 ns        672 ns     812659
-CCTZ_Parse1                  671 ns        671 ns     812659
-CCTZ_Parse1                  789 ns        789 ns     812659
-CCTZ_Parse1_mean             729 ns        729 ns     812659
-CCTZ_Parse1_median           737 ns        737 ns     812659
-CCTZ_Parse1_stddev            56 ns         56 ns     812659
-ICU_Parse1                 83369 ns      83363 ns       7199
-ICU_Parse1                 93202 ns      93203 ns       7199
-ICU_Parse1                 85615 ns      85611 ns       7199
-ICU_Parse1                114555 ns     114530 ns       7199
-ICU_Parse1                 98986 ns      98983 ns       7199
-ICU_Parse1_mean            95145 ns      95138 ns       7199
-ICU_Parse1_median          93202 ns      93203 ns       7199
-ICU_Parse1_stddev          12498 ns      12490 ns       7199
-ICU_Parse1_Inv               300 ns        300 ns    2333216
-ICU_Parse1_Inv               258 ns        258 ns    2333216
-ICU_Parse1_Inv               281 ns        281 ns    2333216
-ICU_Parse1_Inv               275 ns        275 ns    2333216
-ICU_Parse1_Inv               291 ns        291 ns    2333216
-ICU_Parse1_Inv_mean          281 ns        281 ns    2333216
-ICU_Parse1_Inv_median        281 ns        281 ns    2333216
-ICU_Parse1_Inv_stddev         16 ns         16 ns    2333216
-RE_Parse1                     11 ns         11 ns   71724166
-RE_Parse1                     10 ns         10 ns   71724166
-RE_Parse1                     12 ns         12 ns   71724166
-RE_Parse1                     13 ns         13 ns   71724166
-RE_Parse1                     12 ns         12 ns   71724166
-RE_Parse1_mean                12 ns         12 ns   71724166
-RE_Parse1_median              12 ns         12 ns   71724166
-RE_Parse1_stddev               1 ns          1 ns   71724166
+CDT_Parse                   3247 ns       3247 ns     189428
+CDT_Parse                   2997 ns       2997 ns     189428
+CDT_Parse                   2515 ns       2515 ns     189428
+CDT_Parse                   2673 ns       2673 ns     189428
+CDT_Parse                   3227 ns       3227 ns     189428
+CDT_Parse_mean              2932 ns       2932 ns     189428
+CDT_Parse_median            2997 ns       2997 ns     189428
+CDT_Parse_stddev             328 ns        328 ns     189428
+CDT_Parse1                   131 ns        131 ns    5508517
+CDT_Parse1                    99 ns         99 ns    5508517
+CDT_Parse1                    82 ns         82 ns    5508517
+CDT_Parse1                    78 ns         78 ns    5508517
+CDT_Parse1                    90 ns         90 ns    5508517
+CDT_Parse1_mean               96 ns         96 ns    5508517
+CDT_Parse1_median             90 ns         90 ns    5508517
+CDT_Parse1_stddev             21 ns         21 ns    5508517
+CCTZ_Parse1                 1084 ns       1084 ns     854417
+CCTZ_Parse1                  852 ns        852 ns     854417
+CCTZ_Parse1                  873 ns        873 ns     854417
+CCTZ_Parse1                  918 ns        918 ns     854417
+CCTZ_Parse1                  939 ns        939 ns     854417
+CCTZ_Parse1_mean             933 ns        933 ns     854417
+CCTZ_Parse1_median           918 ns        918 ns     854417
+CCTZ_Parse1_stddev            91 ns         91 ns     854417
+ICU_Parse1                251897 ns     251893 ns       2564
+ICU_Parse1                251807 ns     251801 ns       2564
+ICU_Parse1                125341 ns     125341 ns       2564
+ICU_Parse1                 91493 ns      91495 ns       2564
+ICU_Parse1                 79715 ns      79717 ns       2564
+ICU_Parse1_mean           160050 ns     160049 ns       2564
+ICU_Parse1_median         125341 ns     125341 ns       2564
+ICU_Parse1_stddev          85460 ns      85457 ns       2564
+ICU_Parse1_Inv               195 ns        195 ns    3640290
+ICU_Parse1_Inv               176 ns        176 ns    3640290
+ICU_Parse1_Inv               177 ns        177 ns    3640290
+ICU_Parse1_Inv               171 ns        171 ns    3640290
+ICU_Parse1_Inv               165 ns        165 ns    3640290
+ICU_Parse1_Inv_mean          177 ns        177 ns    3640290
+ICU_Parse1_Inv_median        176 ns        176 ns    3640290
+ICU_Parse1_Inv_stddev         11 ns         11 ns    3640290
+RE_Parse1                      7 ns          7 ns   98633539
+RE_Parse1                      8 ns          8 ns   98633539
+RE_Parse1                      7 ns          7 ns   98633539
+RE_Parse1                      7 ns          7 ns   98633539
+RE_Parse1                      7 ns          7 ns   98633539
+RE_Parse1_mean                 7 ns          7 ns   98633539
+RE_Parse1_median               7 ns          7 ns   98633539
+RE_Parse1_stddev               0 ns          0 ns   98633539
+RE_Parse                     403 ns        403 ns    1630402
+RE_Parse                     400 ns        400 ns    1630402
+RE_Parse                     433 ns        433 ns    1630402
+RE_Parse                     417 ns        417 ns    1630402
+RE_Parse                     418 ns        418 ns    1630402
+RE_Parse_mean                414 ns        414 ns    1630402
+RE_Parse_median              417 ns        417 ns    1630402
+RE_Parse_stddev               13 ns         13 ns    1630402
 ```
 
 Pay attention to the timings of `*_Parse1` functions!
 
 ##  Speed comparison ratio
 
+For the single literal parse loop:
+
 | Algo           | Median     |  x best   |
 |----------------|------------|-----------|
-| RE_Parse1      | 12 ns      |  1        |
-| CDT_Parse1     | 96 ns      |  8x       |
-| ICU_Parse1_Inv | 281 ns     |  23x      |
-| CCTZ_Parse1    | 737 ns     |  61x      |
+| RE_Parse1      | 7 ns       |  1        |
+| CDT_Parse1     | 90 ns      |  13x      |
+| ICU_Parse1_Inv | 176 ns     |  25x      |
+| CCTZ_Parse1    | 918 ns     |  131x     |
 
 
 
